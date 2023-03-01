@@ -11,7 +11,6 @@ class Profile(models.Model):
         upload_to='images/', default='../default_profile_klqque'
     )
     address = models.TextField(blank=True)
-    is_admin = models.BooleanField(default=False)
 
     fire_alarm = models.BooleanField(default=False)
     emergency_lighting = models.BooleanField(default=False)
