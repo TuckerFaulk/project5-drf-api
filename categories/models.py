@@ -1,12 +1,12 @@
 from django.db import models
 
 
-class Categories(models.Model):
+class Category(models.Model):
     """Model for Task Categories"""
-    category = models.CharField(max_length=30, unique=True)
+    category_name = models.CharField(max_length=30, unique=True)
 
     class Meta:
-        ordering = ['category']
+        ordering = ['category_name']
 
     def __str__(self):
-        return self.category
+        return self.category_name

@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from categories.models import Categories
+from categories.models import Category
 
 
 class MasterTask(models.Model):
@@ -18,7 +18,7 @@ class MasterTask(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    category = models.ForeignKey(Categories, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     description = models.TextField(blank=True)
     frequency = models.CharField(
         max_length=32, choices=frequency_filter_choices, default='once'
