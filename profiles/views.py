@@ -10,7 +10,7 @@ from drf_api.permissions import IsOwnerOrReadOnly
 class ProfileList(APIView):
     """
     List all profiles
-    No Create View as profile creation is handled by django signals
+    No Create (Post) View as profile creation is handled by django signals
     """
     def get(self, request):
         profiles = Profile.objects.all()
