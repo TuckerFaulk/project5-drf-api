@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'profiles',
+    'master_tasks',
+    'categories',
 ]
 
 MIDDLEWARE = [
