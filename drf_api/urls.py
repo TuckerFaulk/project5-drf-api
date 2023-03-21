@@ -23,4 +23,5 @@ urlpatterns = [
     path('', include('master_tasks.urls')),
     path('', include('categories.urls')),
     path('', include('assigned_to.urls')),
+    path('', include('user_tasks.urls')),
 ]
