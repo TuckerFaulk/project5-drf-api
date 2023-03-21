@@ -3,10 +3,10 @@ from django.contrib.auth.models import User
 from categories.models import Category
 
 
-class action(models.Model):
+class Action(models.Model):
 
     risk_rating_filter_choices = [
-        ("high", "High"), ("medium", "Medium"), ("low", "Low"),]
+        ("low", "Low"), ("medium", "Medium"), ("high", "High"),]
     status_filter_choices = [
         ("open", "Open"), ("in progress", "In Progress"), ("closed", "Closed")]
 
