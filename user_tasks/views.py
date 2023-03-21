@@ -18,6 +18,6 @@ class UserTaskDetail(generics.RetrieveUpdateDestroyAPIView):
     """
 
     """
-    permission_classes = [IsAssignedToOrReadOnly]
+    permission_classes = [IsAssignedToOrReadOnly | permissions.IsAdminUser]
     queryset = UserTask.objects.all()
     serializer_class = UserTaskSerializer

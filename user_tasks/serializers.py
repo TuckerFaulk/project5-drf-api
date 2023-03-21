@@ -13,6 +13,9 @@ class UserTaskSerializer(serializers.ModelSerializer):
     description = serializers.ReadOnlyField(source='task_name.description')
     frequency = serializers.ReadOnlyField(source='task_name.frequency')
 
+    # Consider adding is_allocated_to field (similar purpose as is_owner: ease on the front end)
+    # Review where else this should be added
+
     class Meta:
         model = UserTask
         fields = [
