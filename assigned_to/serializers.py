@@ -10,5 +10,5 @@ class AssignedToSerializer(serializers.ModelSerializer):
         model = AssignedTo
         fields = [
             'id', 'owner', 'task_name', 'assigned_to',
-            'initial_due_date', 'action_by',
+            'initial_due_date', 'completed_by',
         ]

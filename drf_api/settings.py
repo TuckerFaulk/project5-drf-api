@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'profiles',
     'master_tasks',
     'categories',
+    'assigned_to',
 ]
 
 MIDDLEWARE = [
