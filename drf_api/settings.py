@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'categories',
     'assigned_to',
     'user_tasks',
+    'actions',
 ]
 
 MIDDLEWARE = [

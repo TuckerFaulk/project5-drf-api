@@ -5,7 +5,7 @@ from master_tasks.models import MasterTask
 
 class AssignedTo(models.Model):
 
-    action_by_filter_choices = [("user", "User"), ("admin", "Admin"),]
+    completed_by_filter_choices = [("user", "User"), ("admin", "Admin"),]
 
     owner = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='owner')
@@ -14,7 +14,7 @@ class AssignedTo(models.Model):
         User, on_delete=models.CASCADE, related_name='assigned_to')
     initial_due_date = models.DateField(blank=False)
     completed_by = models.CharField(
-        max_length=32, choices=action_by_filter_choices, default='user'
+        max_length=32, choices=completed_by_filter_choices, default='user'
     )
 
     class Meta:

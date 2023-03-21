@@ -11,7 +11,7 @@ class UserTask(models.Model):
 
     status_filter_choices = [
         ("open", "Open"), ("in progress", "In Progress"), ("closed", "Closed")]
-    action_by_filter_choices = [("user", "User"), ("admin", "Admin"),]
+    completed_by_filter_choices = [("user", "User"), ("admin", "Admin"),]
 
     task_name = models.ForeignKey(MasterTask, on_delete=models.CASCADE)
     assigned_to = models.ForeignKey(AssignedTo, on_delete=models.CASCADE)
@@ -21,7 +21,7 @@ class UserTask(models.Model):
     action_required = models.BooleanField(default=False)
     action_description = models.TextField(blank=True)
     completed_by = models.CharField(
-        max_length=32, choices=action_by_filter_choices, default='user'
+        max_length=32, choices=completed_by_filter_choices, default='user'
     )
     image = models.ImageField(upload_to='images/', blank=True)
     status = models.CharField(
