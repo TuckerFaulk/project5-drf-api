@@ -4,8 +4,6 @@ from .models import Action
 
 class ActionSerializer(serializers.ModelSerializer):
 
-    assigned_to = serializers.ReadOnlyField(source='assigned_to.username')
-
     class Meta:
         model = Action
         fields = [
