@@ -58,6 +58,10 @@ def create_repeated_user_task(sender, instance, created, **kwargs):
             repeated_due_date = instance.due_date + timedelta(days=7)
         if instance.task_name.frequency == "monthly":
             repeated_due_date = instance.due_date + timedelta(days=28)
+        if instance.task_name.frequency == "biannually":
+            repeated_due_date = instance.due_date + timedelta(days=182)
+        if instance.task_name.frequency == "annually":
+            repeated_due_date = instance.due_date + timedelta(days=365)
 
         UserTask.objects.create(
             task_name=instance.task_name,

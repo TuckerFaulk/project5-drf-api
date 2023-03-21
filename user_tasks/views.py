@@ -5,7 +5,8 @@ from .serializers import UserTaskSerializer
 
 class UserTaskList(generics.ListAPIView):
     """
-    No POST method as User Tasks are create from the assignd to singal
+    No POST method as User Tasks are either created when initially assigned
+    or when a user task is closed and the frequency is not 'once'
     """
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]  # Need to check whether this is the correct class
     queryset = UserTask.objects.all()
