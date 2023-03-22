@@ -31,6 +31,6 @@ class ActionSerializer(serializers.ModelSerializer):
         model = Action
         fields = [
             'id', 'action_title', 'category', 'description',
-            'assigned_to', 'created_at', 'updated_at', 'due_date',
-            'risk_rating', 'image', 'status', 'is_assigned_to',
+            'assigned_to', 'is_assigned_to', 'created_at', 'updated_at',
+            'due_date', 'risk_rating', 'image', 'status',
         ]

@@ -4,7 +4,7 @@ from master_tasks.models import MasterTask
 from assigned_to.models import AssignedTo
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 
 class UserTask(models.Model):
@@ -50,17 +50,19 @@ def create_repeated_user_task(sender, instance, created, **kwargs):
 
     # Does this need to be a try/catch(err) to handle any potential errors
 
+    todays_date = datetime.now()
+
     if created is False and instance.status == "closed" and instance.task_name.frequency != "one off":
         if instance.task_name.frequency == "daily":
-            repeated_due_date = instance.due_date + timedelta(days=1)  # Consider Weekdays only
+            repeated_due_date = todays_date + timedelta(days=1)  # Consider Weekdays only
         if instance.task_name.frequency == "weekly":
-            repeated_due_date = instance.due_date + timedelta(days=7)
+            repeated_due_date = todays_date + timedelta(days=7)
         if instance.task_name.frequency == "monthly":
-            repeated_due_date = instance.due_date + timedelta(days=28)
+            repeated_due_date = todays_date + timedelta(days=28)
         if instance.task_name.frequency == "biannually":
-            repeated_due_date = instance.due_date + timedelta(days=182)
+            repeated_due_date = todays_date + timedelta(days=182)
         if instance.task_name.frequency == "annually":
-            repeated_due_date = instance.due_date + timedelta(days=365)
+            repeated_due_date = todays_date + timedelta(days=365)
 
         UserTask.objects.create(
             task_name=instance.task_name,
