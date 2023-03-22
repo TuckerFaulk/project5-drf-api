@@ -1,15 +1,23 @@
 from rest_framework import serializers
 from .models import Action
+from datetime import datetime
 
 
 class ActionDetailSerializer(serializers.ModelSerializer):
 
     is_assigned_to = serializers.SerializerMethodField()
+    is_overdue = serializers.SerializerMethodField()
 
     # Source: Code Institutes Django REST Framework Videos
     def get_is_assigned_to(self, obj):
         request = self.context['request']
         return request.user == obj.assigned_to
+
+    def get_is_overdue(self, obj):
+        if obj.due_date is not None:
+            request = self.context['request']
+            todays_date = datetime.now().date()
+            return todays_date > obj.due_date
 
     # Source: Code Institutes Django REST Framework Videos
     def validate_image(self, value):
@@ -32,7 +40,7 @@ class ActionDetailSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'action_title', 'category', 'description',
             'assigned_to', 'is_assigned_to', 'created_at', 'updated_at',
-            'due_date', 'risk_rating', 'image', 'status',
+            'due_date', 'is_overdue', 'risk_rating', 'image', 'status',
         ]
 
 

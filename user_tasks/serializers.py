@@ -9,6 +9,7 @@ class UserTaskSerializer(serializers.ModelSerializer):
     assigned_to = serializers.ReadOnlyField(
         source='assigned_to.assigned_to.username')
     is_assigned_to = serializers.SerializerMethodField()
+    is_overdue = serializers.SerializerMethodField()
     category = serializers.ReadOnlyField(
         source='task_name.category.category_name')
     description = serializers.ReadOnlyField(source='task_name.description')
@@ -18,6 +19,12 @@ class UserTaskSerializer(serializers.ModelSerializer):
     def get_is_assigned_to(self, obj):
         request = self.context['request']
         return request.user == obj.assigned_to.assigned_to
+
+    def get_is_overdue(self, obj):
+        if obj.due_date is not None:
+            request = self.context['request']
+            todays_date = datetime.now().date()
+            return todays_date > obj.due_date
 
     # Source: Code Institutes Django REST Framework Videos
     def validate_image(self, value):
@@ -40,8 +47,8 @@ class UserTaskSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'task_name', 'description', 'category', 'assigned_to',
             'is_assigned_to', 'created_at', 'updated_at', 'due_date',
-            'frequency', 'action_required', 'action_description',
-            'completed_by', 'image', 'status',
+            'is_overdue', 'frequency', 'action_required',
+            'action_description', 'completed_by', 'image', 'status',
         ]
         extra_kwargs = {
             'due_date': {'read_only': True}
