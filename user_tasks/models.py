@@ -9,8 +9,7 @@ from datetime import timedelta
 
 class UserTask(models.Model):
 
-    status_filter_choices = [
-        ("open", "Open"), ("in progress", "In Progress"), ("closed", "Closed")]
+    status_filter_choices = [("open", "Open"), ("closed", "Closed")]
     completed_by_filter_choices = [("user", "User"), ("admin", "Admin"),]
 
     task_name = models.ForeignKey(MasterTask, on_delete=models.CASCADE)

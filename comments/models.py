@@ -2,8 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from user_tasks.models import UserTask
 from actions.models import Action
-# from django.db.models.signals import post_save
-# from django.dispatch import receiver
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class Comments(models.Model):
@@ -26,3 +26,22 @@ class TaskComment(Comments):
 
 class ActionComment(Comments):
     action_title = models.ForeignKey(Action, on_delete=models.CASCADE)
+
+
+@receiver(post_save, sender=UserTask)
+def create_task_status_comment(sender, instance, created, **kwargs):
+    if created is False and instance.status == "closed":
+        # reference https://stackoverflow.com/questions/4721771/get-current-user-log-in-signal-in-django
+        import inspect
+        for frame_record in inspect.stack():
+            if frame_record[3] == 'get_response':
+                request = frame_record[0].f_locals['request']
+                break
+        else:
+            request = None
+
+        TaskComment.objects.create(
+            task_name=instance,
+            content="Task closed",
+            owner=request.user,
+            )

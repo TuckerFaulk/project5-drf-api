@@ -11,7 +11,7 @@ class Action(models.Model):
     risk_rating_filter_choices = [
         ("low", "Low"), ("medium", "Medium"), ("high", "High"),]
     status_filter_choices = [
-        ("open", "Open"), ("in progress", "In Progress"), ("closed", "Closed")]
+        ("open", "Open"), ("closed", "Closed")]
 
     action_title = models.CharField(max_length=80, unique=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
