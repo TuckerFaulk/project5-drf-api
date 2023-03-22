@@ -13,8 +13,21 @@ class UserTaskSerializer(serializers.ModelSerializer):
     description = serializers.ReadOnlyField(source='task_name.description')
     frequency = serializers.ReadOnlyField(source='task_name.frequency')
 
-    # Consider adding is_allocated_to field (similar purpose as is_owner: ease on the front end)
-    # Review where else this should be added
+    # Source: Code Institutes Django REST Framework Videos
+    def validate_image(self, value):
+        if value.size > 1024 * 1024 * 2:
+            raise serializers.ValidationError(
+                'Image size larger then 2MB'
+            )
+        if value.image.width > 4096:
+            raise serializers.ValidationError(
+                'Image width larger than 4096px'
+            )
+        if value.image.height > 4096:
+            raise serializers.ValidationError(
+                'Image height larger than 4096px'
+            )
+        return value
 
     class Meta:
         model = UserTask

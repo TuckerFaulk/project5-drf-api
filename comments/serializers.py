@@ -21,7 +21,7 @@ class TaskCommentSerializer(serializers.ModelSerializer):
 class TaskCommentDetailSerializer(TaskCommentSerializer):
     """
     Serializer for the task Comment model used in Detail view
-    Task name is a read only field so that we dont have to set it on each 
+    Task name is a read only field so that we dont have to set it on each
     update
     """
     task_name = serializers.ReadOnlyField(source='task_name.id')
