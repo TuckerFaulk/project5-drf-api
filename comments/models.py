@@ -45,3 +45,22 @@ def create_task_status_comment(sender, instance, created, **kwargs):
             content="Task closed",
             owner=request.user,
             )
+
+
+@receiver(post_save, sender=Action)
+def create_action_status_comment(sender, instance, created, **kwargs):
+    if created is False and instance.status == "closed":
+        # reference https://stackoverflow.com/questions/4721771/get-current-user-log-in-signal-in-django
+        import inspect
+        for frame_record in inspect.stack():
+            if frame_record[3] == 'get_response':
+                request = frame_record[0].f_locals['request']
+                break
+        else:
+            request = None
+
+        ActionComment.objects.create(
+            action_title=instance,
+            content="Action closed",
+            owner=request.user,
+            )
