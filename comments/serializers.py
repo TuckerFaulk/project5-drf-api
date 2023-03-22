@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import TaskComment
+from .models import TaskComment, ActionComment
 
 
 class TaskCommentSerializer(serializers.ModelSerializer):
@@ -25,3 +25,28 @@ class TaskCommentDetailSerializer(TaskCommentSerializer):
     update
     """
     task_name = serializers.ReadOnlyField(source='task_name.id')
+
+
+class ActionCommentSerializer(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
+    is_owner = serializers.SerializerMethodField()
+
+    def get_is_owner(self, obj):
+        request = self.context['request']
+        return request.user == obj.owner
+
+    class Meta:
+        model = ActionComment
+        fields = [
+            'id', 'owner', 'action_title', 'created_at', 'updated_at',
+            'content', 'is_owner',
+        ]
+
+
+class ActionCommentDetailSerializer(ActionCommentSerializer):
+    """
+    Serializer for the Action Comment model used in Detail view
+    Action Title is a read only field so that we dont have to set it on each
+    update
+    """
+    action_title = serializers.ReadOnlyField(source='action_title.id')
