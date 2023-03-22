@@ -8,10 +8,16 @@ class UserTaskSerializer(serializers.ModelSerializer):
     completed_by = serializers.ReadOnlyField()
     assigned_to = serializers.ReadOnlyField(
         source='assigned_to.assigned_to.username')
+    is_assigned_to = serializers.SerializerMethodField()
     category = serializers.ReadOnlyField(
         source='task_name.category.category_name')
     description = serializers.ReadOnlyField(source='task_name.description')
     frequency = serializers.ReadOnlyField(source='task_name.frequency')
+
+    # Source: Code Institutes Django REST Framework Videos
+    def get_is_assigned_to(self, obj):
+        request = self.context['request']
+        return request.user == obj.assigned_to.assigned_to
 
     # Source: Code Institutes Django REST Framework Videos
     def validate_image(self, value):
@@ -35,7 +41,7 @@ class UserTaskSerializer(serializers.ModelSerializer):
             'id', 'task_name', 'description', 'category', 'assigned_to',
             'created_at', 'updated_at', 'due_date', 'frequency',
             'action_required', 'action_description', 'completed_by', 'image',
-            'status',
+            'status', 'is_assigned_to',
         ]
         extra_kwargs = {
             'due_date': {'read_only': True}

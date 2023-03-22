@@ -28,10 +28,10 @@ class UserTask(models.Model):
     )
 
     class Meta:
-        ordering = ['task_name', 'assigned_to']
+        ordering = ['assigned_to']
 
     def __str__(self):
-        return f"{self.task_name} - {self.assigned_to}"
+        return self.assigned_to
 
 
 @receiver(post_save, sender=AssignedTo)
