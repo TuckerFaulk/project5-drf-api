@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import Action
 
 
-class ActionSerializer(serializers.ModelSerializer):
+class ActionDetailSerializer(serializers.ModelSerializer):
 
     is_assigned_to = serializers.SerializerMethodField()
 
@@ -34,3 +34,12 @@ class ActionSerializer(serializers.ModelSerializer):
             'assigned_to', 'is_assigned_to', 'created_at', 'updated_at',
             'due_date', 'risk_rating', 'image', 'status',
         ]
+
+
+class ActionSerializer(ActionDetailSerializer):
+    """
+    Serializer for the action model used in list view
+    Status is a read only field so it can not be set to closed
+    before it is has already been opened
+    """
+    status = serializers.ReadOnlyField()

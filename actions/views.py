@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions
 from .models import Action
-from .serializers import ActionSerializer
+from .serializers import ActionSerializer, ActionDetailSerializer
 from drf_api.permissions import IsAssignedToOrReadOnly
 
 
@@ -20,4 +20,4 @@ class ActionDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     permission_classes = [IsAssignedToOrReadOnly | permissions.IsAdminUser]
     queryset = Action.objects.all()
-    serializer_class = ActionSerializer
+    serializer_class = ActionDetailSerializer

@@ -54,7 +54,7 @@ def create_repeated_user_task(sender, instance, created, **kwargs):
 
     if created is False and instance.status == "closed" and instance.task_name.frequency != "one off":
         if instance.task_name.frequency == "daily":
-            repeated_due_date = todays_date + timedelta(days=1)  # Consider Weekdays only
+            repeated_due_date = todays_date + timedelta(days=1)
         if instance.task_name.frequency == "weekly":
             repeated_due_date = todays_date + timedelta(days=7)
         if instance.task_name.frequency == "monthly":
