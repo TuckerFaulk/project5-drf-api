@@ -25,4 +25,5 @@ urlpatterns = [
     path('', include('assigned_to.urls')),
     path('', include('user_tasks.urls')),
     path('', include('actions.urls')),
+    path('', include('comments.urls')),
 ]

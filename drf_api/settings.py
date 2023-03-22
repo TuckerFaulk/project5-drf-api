@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'assigned_to',
     'user_tasks',
     'actions',
+    'comments',
 ]
 
 MIDDLEWARE = [
