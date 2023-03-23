@@ -14,6 +14,6 @@ class MasterTaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = MasterTask
         fields = [
-            'id', 'task_name', 'owner', 'created_at', 'updated_at',
-            'category', 'description', 'frequency', 'is_owner',
+            'id', 'task_name', 'owner', 'is_owner', 'created_at',
+            'updated_at', 'category', 'description', 'frequency', 
         ]

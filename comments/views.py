@@ -1,4 +1,4 @@
-from rest_framework import generics, permissions
+from rest_framework import generics
 from .models import TaskComment, ActionComment
 from .serializers import TaskCommentSerializer, TaskCommentDetailSerializer, ActionCommentSerializer, ActionCommentDetailSerializer
 from drf_api.permissions import IsOwnerOrReadOnly
