@@ -1,6 +1,7 @@
 from rest_framework import generics, permissions
 from .models import MasterTask
 from .serializers import MasterTaskSerializer
+from drf_api.permissions import IsOwnerOrReadOnly
 
 
 class MasterTaskList(generics.ListCreateAPIView):
@@ -19,8 +20,9 @@ class MasterTaskList(generics.ListCreateAPIView):
 class MasterTaskDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     Retrieve, update or delete a master task.
-    Permission for admin only.
+    Permission for admin only - only an admin owner can update or delete
+    their own master task.
     """
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = [IsOwnerOrReadOnly & permissions.IsAdminUser]
     queryset = MasterTask.objects.all()
     serializer_class = MasterTaskSerializer

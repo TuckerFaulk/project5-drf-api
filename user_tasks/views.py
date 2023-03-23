@@ -9,7 +9,7 @@ class UserTaskList(generics.ListAPIView):
     Lists all user tasks.
     No POST method as User Tasks are either created when initially assigned
     or when a user task is closed and the frequency is not 'once'
-    No permissions class is required as there is no POST Method available
+    No permissions class is required as there is no POST method available
     """
     queryset = UserTask.objects.all()
     serializer_class = UserTaskSerializer
@@ -18,7 +18,8 @@ class UserTaskList(generics.ListAPIView):
 class UserTaskDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     Retrieve, update or delete a user task if it is assigned to the logged in
-    user or an admin user is logged in
+    user or an admin user is logged in. This allows either user to update the
+    task if it is to be completed by them.
     """
     permission_classes = [IsAssignedToOrReadOnly | permissions.IsAdminUser]
     queryset = UserTask.objects.all()
