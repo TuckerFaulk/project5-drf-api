@@ -13,7 +13,7 @@ class Action(models.Model):
     status_filter_choices = [
         ("open", "Open"), ("closed", "Closed")]
 
-    action_title = models.CharField(max_length=80, unique=True)
+    action_title = models.CharField(max_length=80)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     description = models.TextField(blank=True)
     assigned_to = models.ForeignKey(

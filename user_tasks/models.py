@@ -31,7 +31,7 @@ class UserTask(models.Model):
         ordering = ['assigned_to']
 
     def __str__(self):
-        return self.assigned_to.assigned_to.username
+        return f"{self.assigned_to}"
 
 
 @receiver(post_save, sender=AssignedTo)
