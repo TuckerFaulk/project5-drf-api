@@ -1,3 +1,4 @@
+from django.http import Http404
 from rest_framework import status, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -6,6 +7,12 @@ from .serializers import CategorySerializer
 
 
 class CategoryList(APIView):
+    """
+    Lists all categories.
+    Only admin users can list and create categories.
+    Generic views have not been used within this instance to display the
+    ability to be able to create class-based views.
+    """
 
     serializer_class = CategorySerializer
     permission_classes = [permissions.IsAdminUser]
@@ -18,7 +25,7 @@ class CategoryList(APIView):
     def post(self, request):
         serializer = CategorySerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(owner=request.user)
+            serializer.save()
             return Response(
                 serializer.data, status=status.HTTP_201_CREATED
             )
@@ -29,7 +36,10 @@ class CategoryList(APIView):
 
 class CategoryDetail(APIView):
     """
-    Detail individual categories
+    Detail individual categories.
+    Retrieve, update or delete a category if admin user.
+    Generic views have not been used within this instance to display the
+    ability to be able to create class-based views.
     """
     serializer_class = CategorySerializer
     permission_classes = [permissions.IsAdminUser]
@@ -54,3 +64,10 @@ class CategoryDetail(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        category = self.get_object(pk)
+        category.delete()
+        return Response(
+            status=status.HTTP_204_NO_CONTENT
+        )
