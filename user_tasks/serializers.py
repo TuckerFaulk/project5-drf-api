@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import UserTask
+from datetime import datetime, timedelta
 
 
 class UserTaskSerializer(serializers.ModelSerializer):
@@ -21,10 +22,9 @@ class UserTaskSerializer(serializers.ModelSerializer):
         return request.user == obj.assigned_to.assigned_to
 
     def get_is_overdue(self, obj):
-        if obj.due_date is not None:
-            request = self.context['request']
-            todays_date = datetime.now().date()
-            return todays_date > obj.due_date
+        request = self.context['request']
+        todays_date = datetime.now().date()
+        return todays_date > obj.due_date
 
     # Source: Code Institutes Django REST Framework Videos
     def validate_image(self, value):

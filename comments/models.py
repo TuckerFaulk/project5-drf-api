@@ -6,7 +6,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
-class Comments(models.Model):
+class Comment(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -20,11 +20,11 @@ class Comments(models.Model):
         return self.content
 
 
-class TaskComment(Comments):
+class TaskComment(Comment):
     task_name = models.ForeignKey(UserTask, on_delete=models.CASCADE)
 
 
-class ActionComment(Comments):
+class ActionComment(Comment):
     action_title = models.ForeignKey(Action, on_delete=models.CASCADE)
 
 
