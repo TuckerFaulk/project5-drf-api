@@ -33,5 +33,12 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
     Detail individual profiles
     """
     permission_classes = [IsOwnerOrReadOnly]
-    queryset = Profile.objects.all()
+    queryset = Profile.objects.annotate(
+        open_tasks_count=Count(
+            'owner__assigned_to_assigned_to__user_task_assigned_to',
+            distinct=True, filter=Q(
+                owner__assigned_to_assigned_to__user_task_assigned_to__status='open')),
+        open_actions_count=Count('owner__action_assigned_to', distinct=True,
+                                 filter=Q(owner__action_assigned_to__status='open')),
+    )
     serializer_class = ProfileSerializer
