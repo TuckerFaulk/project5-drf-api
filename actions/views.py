@@ -1,4 +1,4 @@
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, filters
 from .models import Action
 from .serializers import ActionSerializer, ActionDetailSerializer
 from drf_api.permissions import IsAssignedToOrReadOnly
@@ -11,6 +11,13 @@ class ActionList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Action.objects.all()
     serializer_class = ActionSerializer
+    filter_backends = [
+        filters.SearchFilter,
+    ]
+    search_fields = [
+        'action_title',
+        'category__category_name',
+    ]
 
 
 class ActionDetail(generics.RetrieveUpdateDestroyAPIView):
