@@ -1,4 +1,5 @@
 from rest_framework import generics, permissions, filters
+from django_filters.rest_framework import DjangoFilterBackend
 from .models import UserTask
 from .serializers import UserTaskSerializer
 from drf_api.permissions import IsAssignedToOrReadOnly
@@ -15,6 +16,15 @@ class UserTaskList(generics.ListAPIView):
     serializer_class = UserTaskSerializer
     filter_backends = [
         filters.SearchFilter,
+        DjangoFilterBackend,
+    ]
+    filterset_fields = [
+        'task_name',
+        'task_name__category',
+        'task_name__frequency',
+        'assigned_to__assigned_to__profile',
+        'completed_by',
+        'status',
     ]
     search_fields = [
         'task_name__task_name',
