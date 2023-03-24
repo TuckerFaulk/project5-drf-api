@@ -12,8 +12,10 @@ class UserTask(models.Model):
     status_filter_choices = [("open", "Open"), ("closed", "Closed")]
     completed_by_filter_choices = [("user", "User"), ("admin", "Admin"),]
 
-    task_name = models.ForeignKey(MasterTask, on_delete=models.CASCADE)
-    assigned_to = models.ForeignKey(AssignedTo, on_delete=models.CASCADE)
+    task_name = models.ForeignKey(
+        MasterTask, on_delete=models.CASCADE, related_name='user_task_task_name')
+    assigned_to = models.ForeignKey(
+        AssignedTo, on_delete=models.CASCADE, related_name='user_task_assigned_to')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     due_date = models.DateField(blank=False)
@@ -42,7 +44,7 @@ def create_intial_user_task(sender, instance, created, **kwargs):
             assigned_to=instance,
             due_date=instance.initial_due_date,
             completed_by=instance.completed_by,
-            )
+        )
 
 
 @receiver(post_save, sender=UserTask)
@@ -69,4 +71,4 @@ def create_repeated_user_task(sender, instance, created, **kwargs):
             assigned_to=instance.assigned_to,
             due_date=repeated_due_date,
             completed_by=instance.assigned_to.completed_by,
-            )
+        )

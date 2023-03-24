@@ -8,10 +8,10 @@ class AssignedTo(models.Model):
     completed_by_filter_choices = [("user", "User"), ("admin", "Admin"),]
 
     owner = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='owner')
+        User, on_delete=models.CASCADE, related_name='assigned_to_owner')
     task_name = models.ForeignKey(MasterTask, on_delete=models.CASCADE)
     assigned_to = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='assigned_to')
+        User, on_delete=models.CASCADE, related_name='assigned_to_assigned_to')
     initial_due_date = models.DateField(blank=False)
     completed_by = models.CharField(
         max_length=32, choices=completed_by_filter_choices, default='user'

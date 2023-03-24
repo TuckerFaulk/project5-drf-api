@@ -14,10 +14,11 @@ class Action(models.Model):
         ("open", "Open"), ("closed", "Closed")]
 
     action_title = models.CharField(max_length=80)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(
+        Category, on_delete=models.CASCADE, related_name='action_category')
     description = models.TextField(blank=True)
     assigned_to = models.ForeignKey(
-        User, on_delete=models.CASCADE)
+        User, on_delete=models.CASCADE, related_name='action_assigned_to')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     due_date = models.DateField(null=True, blank=True)
