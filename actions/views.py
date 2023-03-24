@@ -1,4 +1,5 @@
 from rest_framework import generics, permissions, filters
+from django_filters.rest_framework import DjangoFilterBackend
 from .models import Action
 from .serializers import ActionSerializer, ActionDetailSerializer
 from drf_api.permissions import IsAssignedToOrReadOnly
@@ -13,6 +14,13 @@ class ActionList(generics.ListCreateAPIView):
     serializer_class = ActionSerializer
     filter_backends = [
         filters.SearchFilter,
+        DjangoFilterBackend,
+    ]
+    filterset_fields = [
+        'assigned_to__profile',
+        'category',
+        'risk_rating',
+        'status',
     ]
     search_fields = [
         'action_title',
