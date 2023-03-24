@@ -11,14 +11,18 @@ class ProfileList(generics.ListAPIView):
     No Create (Post) View as profile creation is handled by django signals
     """
     queryset = Profile.objects.annotate(
-        # Might need to split open task count into admin and user???
-        open_tasks_count=Count(
+        user_open_tasks_count=Count(
+            'owner__assigned_to_assigned_to__user_task_assigned_to',
+            distinct=True, filter=Q(
+                owner__assigned_to_assigned_to__user_task_assigned_to__status='open',
+                owner__assigned_to_assigned_to__user_task_assigned_to__completed_by='user')),
+
+        admin_open_tasks_count=Count(
             'owner__assigned_to_assigned_to__user_task_assigned_to',
             distinct=True, filter=Q(
                 owner__assigned_to_assigned_to__user_task_assigned_to__status='open',
                 owner__assigned_to_assigned_to__user_task_assigned_to__completed_by='admin')),
 
-        # Dont need to filter action by completed by as does exist
         open_actions_count=Count('owner__action_assigned_to', distinct=True,
                                  filter=Q(owner__action_assigned_to__status='open')),
     )
@@ -27,7 +31,8 @@ class ProfileList(generics.ListAPIView):
         filters.OrderingFilter
     ]
     ordering_fields = [
-        'open_tasks_count',
+        'user_open_tasks_count',
+        'admin_open_tasks_count',
         'open_actions_count',
     ]
 
@@ -38,10 +43,18 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
     """
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Profile.objects.annotate(
-        open_tasks_count=Count(
+        user_open_tasks_count=Count(
             'owner__assigned_to_assigned_to__user_task_assigned_to',
             distinct=True, filter=Q(
-                owner__assigned_to_assigned_to__user_task_assigned_to__status='open')),
+                owner__assigned_to_assigned_to__user_task_assigned_to__status='open',
+                owner__assigned_to_assigned_to__user_task_assigned_to__completed_by='user')),
+
+        admin_open_tasks_count=Count(
+            'owner__assigned_to_assigned_to__user_task_assigned_to',
+            distinct=True, filter=Q(
+                owner__assigned_to_assigned_to__user_task_assigned_to__status='open',
+                owner__assigned_to_assigned_to__user_task_assigned_to__completed_by='admin')),
+
         open_actions_count=Count('owner__action_assigned_to', distinct=True,
                                  filter=Q(owner__action_assigned_to__status='open')),
     )

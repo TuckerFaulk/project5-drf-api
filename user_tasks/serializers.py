@@ -49,7 +49,6 @@ class UserTaskSerializer(serializers.ModelSerializer):
             'is_assigned_to', 'created_at', 'updated_at', 'due_date',
             'is_overdue', 'frequency', 'action_required',
             'action_description', 'completed_by', 'image', 'status',
-            'overdue_tasks_count',
         ]
         extra_kwargs = {
             'due_date': {'read_only': True}
