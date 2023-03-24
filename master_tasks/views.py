@@ -1,4 +1,5 @@
 from rest_framework import generics, permissions, filters
+from django_filters.rest_framework import DjangoFilterBackend
 from .models import MasterTask
 from .serializers import MasterTaskSerializer
 from drf_api.permissions import IsOwnerOrReadOnly
@@ -14,6 +15,11 @@ class MasterTaskList(generics.ListCreateAPIView):
     serializer_class = MasterTaskSerializer
     filter_backends = [
         filters.SearchFilter,
+        DjangoFilterBackend,
+    ]
+    filterset_fields = [
+        'category',
+        'frequency',
     ]
     search_fields = [
         'task_name',
