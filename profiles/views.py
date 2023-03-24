@@ -11,10 +11,14 @@ class ProfileList(generics.ListAPIView):
     No Create (Post) View as profile creation is handled by django signals
     """
     queryset = Profile.objects.annotate(
+        # Might need to split open task count into admin and user???
         open_tasks_count=Count(
             'owner__assigned_to_assigned_to__user_task_assigned_to',
             distinct=True, filter=Q(
-                owner__assigned_to_assigned_to__user_task_assigned_to__status='open')),
+                owner__assigned_to_assigned_to__user_task_assigned_to__status='open',
+                owner__assigned_to_assigned_to__user_task_assigned_to__completed_by='admin')),
+
+        # Dont need to filter action by completed by as does exist
         open_actions_count=Count('owner__action_assigned_to', distinct=True,
                                  filter=Q(owner__action_assigned_to__status='open')),
     )
