@@ -18,7 +18,7 @@ class Action(models.Model):
         Category, on_delete=models.CASCADE, related_name='action_category')
     description = models.TextField(blank=True)
     assigned_to = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='action_assigned_to')
+        User, on_delete=models.CASCADE, related_name='action_assigned_to', limit_choices_to={'is_staff': False})
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     due_date = models.DateField(null=True, blank=True)
