@@ -1,4 +1,4 @@
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, filters
 from .models import UserTask
 from .serializers import UserTaskSerializer
 from drf_api.permissions import IsAssignedToOrReadOnly
@@ -13,6 +13,13 @@ class UserTaskList(generics.ListAPIView):
     """
     queryset = UserTask.objects.all()
     serializer_class = UserTaskSerializer
+    filter_backends = [
+        filters.SearchFilter,
+    ]
+    search_fields = [
+        'task_name__task_name',
+        'task_name__category__category_name',
+    ]
 
 
 class UserTaskDetail(generics.RetrieveUpdateDestroyAPIView):
