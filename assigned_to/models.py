@@ -19,7 +19,6 @@ class AssignedTo(models.Model):
 
     class Meta:
         ordering = ['task_name', 'assigned_to']
-        unique_together = ['owner', 'assigned_to']
 
     def __str__(self):
         return f'{self.task_name} - {self.assigned_to}'
