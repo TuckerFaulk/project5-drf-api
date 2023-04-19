@@ -23,11 +23,11 @@ class Action(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     due_date = models.DateField(null=True, blank=True)
     risk_rating = models.CharField(
-        max_length=6, choices=risk_rating_filter_choices, default='low'
+        max_length=6, choices=risk_rating_filter_choices, default='Low'
     )
     image = models.ImageField(upload_to='images/', blank=True)
     status = models.CharField(
-        max_length=12, choices=status_filter_choices, default='open'
+        max_length=12, choices=status_filter_choices, default='Open'
     )
 
     class Meta:

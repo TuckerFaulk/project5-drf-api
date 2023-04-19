@@ -14,7 +14,7 @@ class AssignedTo(models.Model):
         User, on_delete=models.CASCADE, related_name='assigned_to_assigned_to', limit_choices_to={'is_staff': False})
     initial_due_date = models.DateField(blank=False)
     completed_by = models.CharField(
-        max_length=32, choices=completed_by_filter_choices, default='user'
+        max_length=32, choices=completed_by_filter_choices, default='User'
     )
 
     class Meta:

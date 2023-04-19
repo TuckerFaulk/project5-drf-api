@@ -22,11 +22,11 @@ class UserTask(models.Model):
     action_required = models.BooleanField(default=False)
     action_description = models.TextField(blank=True)
     completed_by = models.CharField(
-        max_length=32, choices=completed_by_filter_choices, default='user'
+        max_length=32, choices=completed_by_filter_choices, default='User'
     )
     image = models.ImageField(upload_to='images/', blank=True)
     status = models.CharField(
-        max_length=32, choices=status_filter_choices, default='open'
+        max_length=32, choices=status_filter_choices, default='Open'
     )
 
     class Meta:
@@ -54,7 +54,7 @@ def create_repeated_user_task(sender, instance, created, **kwargs):
 
     todays_date = datetime.now()
 
-    if created is False and instance.status == "Closed" and instance.task_name.frequency != "one off":
+    if created is False and instance.status == "Closed" and instance.task_name.frequency != "Once":
         if instance.task_name.frequency == "Daily":
             repeated_due_date = todays_date + timedelta(days=1)
         if instance.task_name.frequency == "Weekly":
