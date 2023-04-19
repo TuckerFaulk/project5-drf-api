@@ -5,7 +5,7 @@ from master_tasks.models import MasterTask
 
 class AssignedTo(models.Model):
 
-    completed_by_filter_choices = [("user", "User"), ("admin", "Admin"),]
+    completed_by_filter_choices = [("User", "User"), ("Admin", "Admin"),]
 
     owner = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='assigned_to_owner')

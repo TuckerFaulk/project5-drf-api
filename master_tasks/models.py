@@ -6,12 +6,12 @@ from categories.models import Category
 class MasterTask(models.Model):
 
     frequency_filter_choices = [
-        ("once", "Once"),
-        ("daily", "Daily"),
-        ("weekly", "Weekly"),
-        ("monthly", "Monthly"),
-        ("biannually", "Biannually"),
-        ("annually", "Annually"),
+        ("Once", "Once"),
+        ("Daily", "Daily"),
+        ("Weekly", "Weekly"),
+        ("Monthly", "Monthly"),
+        ("Biannually", "Biannually"),
+        ("Annually", "Annually"),
         ]
 
     task_name = models.CharField(max_length=80, unique=True)

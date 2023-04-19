@@ -9,8 +9,8 @@ from datetime import datetime, timedelta
 
 class UserTask(models.Model):
 
-    status_filter_choices = [("open", "Open"), ("closed", "Closed")]
-    completed_by_filter_choices = [("user", "User"), ("admin", "Admin"),]
+    status_filter_choices = [("Open", "Open"), ("Closed", "Closed")]
+    completed_by_filter_choices = [("User", "User"), ("Admin", "Admin"),]
 
     task_name = models.ForeignKey(
         MasterTask, on_delete=models.CASCADE, related_name='user_task_task_name')
@@ -54,16 +54,16 @@ def create_repeated_user_task(sender, instance, created, **kwargs):
 
     todays_date = datetime.now()
 
-    if created is False and instance.status == "closed" and instance.task_name.frequency != "one off":
-        if instance.task_name.frequency == "daily":
+    if created is False and instance.status == "Closed" and instance.task_name.frequency != "one off":
+        if instance.task_name.frequency == "Daily":
             repeated_due_date = todays_date + timedelta(days=1)
-        if instance.task_name.frequency == "weekly":
+        if instance.task_name.frequency == "Weekly":
             repeated_due_date = todays_date + timedelta(days=7)
-        if instance.task_name.frequency == "monthly":
+        if instance.task_name.frequency == "Monthly":
             repeated_due_date = todays_date + timedelta(days=28)
-        if instance.task_name.frequency == "biannually":
+        if instance.task_name.frequency == "Biannually":
             repeated_due_date = todays_date + timedelta(days=182)
-        if instance.task_name.frequency == "annually":
+        if instance.task_name.frequency == "Annually":
             repeated_due_date = todays_date + timedelta(days=365)
 
         UserTask.objects.create(

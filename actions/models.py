@@ -9,9 +9,9 @@ from django.dispatch import receiver
 class Action(models.Model):
 
     risk_rating_filter_choices = [
-        ("low", "Low"), ("medium", "Medium"), ("high", "High"),]
+        ("Low", "Low"), ("Medium", "Medium"), ("High", "High"),]
     status_filter_choices = [
-        ("open", "Open"), ("closed", "Closed")]
+        ("Open", "Open"), ("Closed", "Closed")]
 
     action_title = models.CharField(max_length=80)
     category = models.ForeignKey(
@@ -39,7 +39,7 @@ class Action(models.Model):
 
 @receiver(post_save, sender=UserTask)
 def create_task_action(sender, instance, created, **kwargs):
-    if created is False and instance.status == "closed" and instance.action_required:
+    if created is False and instance.status == "Closed" and instance.action_required:
 
         Action.objects.create(
             action_title=instance.task_name.task_name,
