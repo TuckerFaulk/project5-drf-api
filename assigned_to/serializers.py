@@ -7,11 +7,20 @@ class AssignedToSerializer(serializers.ModelSerializer):
 
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
+    task_name = serializers.SerializerMethodField()
+    assigned_to = serializers.SerializerMethodField()
 
     # Source: Code Institutes Django REST Framework Videos
     def get_is_owner(self, obj):
         request = self.context['request']
         return request.user == obj.owner
+
+    # Source: https://stackoverflow.com/questions/63130043/how-to-get-field-name-instead-of-foreign-id-in-django
+    def get_task_name(self, instance):
+        return instance.task_name.task_name
+
+    def get_assigned_to(self, instance):
+        return instance.assigned_to.username
 
     class Meta:
         model = AssignedTo
