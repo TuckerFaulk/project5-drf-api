@@ -1,5 +1,6 @@
 from django.db.models import Q, Count
 from rest_framework import generics, filters
+from django_filters.rest_framework import DjangoFilterBackend
 from .models import Profile
 from .serializers import ProfileSerializer
 from drf_api.permissions import IsOwnerOrReadOnly
@@ -28,7 +29,11 @@ class ProfileList(generics.ListAPIView):
     )
     serializer_class = ProfileSerializer
     filter_backends = [
-        filters.OrderingFilter
+        filters.OrderingFilter,
+        DjangoFilterBackend,
+    ]
+    filterset_fields = [
+        'owner__is_staff',
     ]
     ordering_fields = [
         'user_open_tasks_count',
