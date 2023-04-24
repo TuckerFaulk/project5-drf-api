@@ -5,6 +5,8 @@ from .models import TaskComment, ActionComment
 
 class TaskCommentSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
+    profile_id = serializers.ReadOnlyField(source='owner.profile.id')
+    profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
     is_owner = serializers.SerializerMethodField()
 
     created_at = serializers.SerializerMethodField()
@@ -23,8 +25,8 @@ class TaskCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = TaskComment
         fields = [
-            'id', 'owner', 'task_name', 'created_at', 'updated_at',
-            'content', 'is_owner',
+            'id', 'owner', 'profile_id', 'profile_image', 'task_name',
+            'created_at', 'updated_at', 'content', 'is_owner',
         ]
 
 
@@ -40,6 +42,8 @@ class TaskCommentDetailSerializer(TaskCommentSerializer):
 class ActionCommentSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
+    profile_id = serializers.ReadOnlyField(source='owner.profile.id')
+    profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
 
     created_at = serializers.SerializerMethodField()
     updated_at = serializers.SerializerMethodField()
@@ -57,8 +61,8 @@ class ActionCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = ActionComment
         fields = [
-            'id', 'owner', 'action_title', 'created_at', 'updated_at',
-            'content', 'is_owner',
+            'id', 'owner', 'profile_id', 'profile_image', 'action_title',
+            'created_at', 'updated_at', 'content', 'is_owner',
         ]
 
 
