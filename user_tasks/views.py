@@ -2,7 +2,7 @@ from rest_framework import generics, permissions, filters
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import UserTask
 from .serializers import UserTaskSerializer
-from drf_api.permissions import IsAssignedToOrReadOnly
+from drf_api.permissions import IsTaskAssignedToOrReadOnly
 
 
 class UserTaskList(generics.ListAPIView):
@@ -38,6 +38,6 @@ class UserTaskDetail(generics.RetrieveUpdateDestroyAPIView):
     user or an admin user is logged in. This allows either user to update the
     task if it is to be completed by them.
     """
-    permission_classes = [IsAssignedToOrReadOnly | permissions.IsAdminUser]
+    permission_classes = [IsTaskAssignedToOrReadOnly | permissions.IsAdminUser]
     queryset = UserTask.objects.all()
     serializer_class = UserTaskSerializer
