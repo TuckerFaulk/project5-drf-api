@@ -15,7 +15,6 @@ class CategoryList(APIView):
     """
 
     serializer_class = CategorySerializer
-    permission_classes = [permissions.IsAdminUser]
 
     def get(self, request):
         category = Category.objects.all()
@@ -32,6 +31,13 @@ class CategoryList(APIView):
         return Response(
             serializer.errors, status=status.HTTP_400_BAD_REQUEST
         )
+
+    def get_permissions(self):
+        if self.request.method == 'POST':
+            permission_classes = [permissions.IsAdminUser]
+        else:
+            permission_classes = [permissions.IsAuthenticated]
+        return [permission() for permission in permission_classes]
 
 
 class CategoryDetail(APIView):
