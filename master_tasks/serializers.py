@@ -5,6 +5,7 @@ from .models import MasterTask
 class MasterTaskSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
+    category_name = serializers.ReadOnlyField(source='category.category_name')
 
     # Source: Code Institutes Django REST Framework Videos
     def get_is_owner(self, obj):
@@ -12,14 +13,15 @@ class MasterTaskSerializer(serializers.ModelSerializer):
         return request.user == obj.owner
 
     # Source: https://stackoverflow.com/questions/52491330/how-to-get-foreignkey-field-name-instead-of-id-in-django-rest-framework
-    def to_representation(self, instance):
-        rep = super(MasterTaskSerializer, self).to_representation(instance)
-        rep['category'] = instance.category.category_name
-        return rep
+    # def to_representation(self, instance):
+    #     rep = super(MasterTaskSerializer, self).to_representation(instance)
+    #     rep['category'] = instance.category.category_name
+    #     return rep
 
     class Meta:
         model = MasterTask
         fields = [
             'id', 'task_name', 'owner', 'is_owner', 'created_at',
-            'updated_at', 'category', 'description', 'frequency', 
+            'updated_at', 'category', 'category_name', 'description',
+            'frequency',
         ]
