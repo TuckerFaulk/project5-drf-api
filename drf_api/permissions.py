@@ -19,4 +19,4 @@ class IsActionAssignedToOrReadOnly(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         if request.method in permissions.SAFE_METHODS:
             return True
-        return obj.assigned_to.username == request.user
+        return obj.assigned_to == request.user
