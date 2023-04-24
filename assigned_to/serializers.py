@@ -6,6 +6,9 @@ from .models import AssignedTo
 class AssignedToSerializer(serializers.ModelSerializer):
 
     owner = serializers.ReadOnlyField(source='owner.username')
+    assigned_to_username = serializers.ReadOnlyField(
+        source='assigned_to.username')
+    task_name_title = serializers.ReadOnlyField(source='task_name.task_name')
     is_owner = serializers.SerializerMethodField()
 
     # Source: Code Institutes Django REST Framework Videos
@@ -13,18 +16,12 @@ class AssignedToSerializer(serializers.ModelSerializer):
         request = self.context['request']
         return request.user == obj.owner
 
-    # Source: https://stackoverflow.com/questions/52491330/how-to-get-foreignkey-field-name-instead-of-id-in-django-rest-framework
-    def to_representation(self, instance):
-        rep = super(AssignedToSerializer, self).to_representation(instance)
-        rep['assigned_to'] = instance.assigned_to.username
-        rep['task_name'] = instance.task_name.task_name
-        return rep
-
     class Meta:
         model = AssignedTo
         fields = [
-            'id', 'owner', 'task_name', 'assigned_to',
-            'initial_due_date', 'completed_by', 'is_owner',
+            'id', 'owner', 'task_name', 'task_name_title', 'assigned_to',
+            'assigned_to_username', 'initial_due_date', 'completed_by',
+            'is_owner',
         ]
 
     def create(self, validated_data):
