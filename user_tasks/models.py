@@ -50,8 +50,6 @@ def create_intial_user_task(sender, instance, created, **kwargs):
 @receiver(post_save, sender=UserTask)
 def create_repeated_user_task(sender, instance, created, **kwargs):
 
-    # Does this need to be a try/catch(err) to handle any potential errors
-
     todays_date = datetime.now()
 
     if created is False and instance.status == "Closed" and instance.task_name.frequency != "Once":
