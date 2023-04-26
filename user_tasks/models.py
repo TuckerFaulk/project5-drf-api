@@ -30,7 +30,7 @@ class UserTask(models.Model):
     )
 
     class Meta:
-        ordering = ['assigned_to']
+        ordering = ['due_date']
 
     def __str__(self):
         return f"{self.assigned_to}"
