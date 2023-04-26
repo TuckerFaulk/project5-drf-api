@@ -15,17 +15,17 @@ class ProfileList(generics.ListAPIView):
         user_open_tasks_count=Count(
             'owner__assigned_to_assigned_to__user_task_assigned_to',
             distinct=True, filter=Q(
-                owner__assigned_to_assigned_to__user_task_assigned_to__status='open',
-                owner__assigned_to_assigned_to__user_task_assigned_to__completed_by='user')),
+                owner__assigned_to_assigned_to__user_task_assigned_to__status='Open',
+                owner__assigned_to_assigned_to__user_task_assigned_to__completed_by='User')),
 
         admin_open_tasks_count=Count(
             'owner__assigned_to_assigned_to__user_task_assigned_to',
             distinct=True, filter=Q(
-                owner__assigned_to_assigned_to__user_task_assigned_to__status='open',
-                owner__assigned_to_assigned_to__user_task_assigned_to__completed_by='admin')),
+                owner__assigned_to_assigned_to__user_task_assigned_to__status='Open',
+                owner__assigned_to_assigned_to__user_task_assigned_to__completed_by='Admin')),
 
         open_actions_count=Count('owner__action_assigned_to', distinct=True,
-                                 filter=Q(owner__action_assigned_to__status='open')),
+                                 filter=Q(owner__action_assigned_to__status='Open')),
     )
     serializer_class = ProfileSerializer
     filter_backends = [
@@ -51,16 +51,16 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
         user_open_tasks_count=Count(
             'owner__assigned_to_assigned_to__user_task_assigned_to',
             distinct=True, filter=Q(
-                owner__assigned_to_assigned_to__user_task_assigned_to__status='open',
-                owner__assigned_to_assigned_to__user_task_assigned_to__completed_by='user')),
+                owner__assigned_to_assigned_to__user_task_assigned_to__status='Open',
+                owner__assigned_to_assigned_to__user_task_assigned_to__completed_by='User')),
 
         admin_open_tasks_count=Count(
             'owner__assigned_to_assigned_to__user_task_assigned_to',
             distinct=True, filter=Q(
-                owner__assigned_to_assigned_to__user_task_assigned_to__status='open',
-                owner__assigned_to_assigned_to__user_task_assigned_to__completed_by='admin')),
+                owner__assigned_to_assigned_to__user_task_assigned_to__status='Open',
+                owner__assigned_to_assigned_to__user_task_assigned_to__completed_by='Admin')),
 
         open_actions_count=Count('owner__action_assigned_to', distinct=True,
-                                 filter=Q(owner__action_assigned_to__status='open')),
+                                 filter=Q(owner__action_assigned_to__status='Open')),
     )
     serializer_class = ProfileSerializer
