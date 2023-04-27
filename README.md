@@ -1,108 +1,352 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# HAVS|CALC|DB - Database for Risk Assessing Vibration
 
-Welcome TuckerFaulk,
+<!-- ![Am I Responsive Image](static/readme_images/am_i_responsive.jpg) -->
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+The live link for the site can be found here - https://project5-dcms-react.herokuapp.com/
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+# Table of Contents
+<!-- - [Overview](#overview)
+- [UX](#ux)
+  - [Strategy](#strategy)
+  - [Scope](#scope)
+  - [Structure](#structure)
+  - [Skeleton](#skeleton)
+  - [Surface](#surface)
+- [Languages Used](#languages-used)
+- [Features](#features)
+  - [Existing Features](#existing-features)
+  - [CRUD](#crud)
+  - [Other Features](#other-features)
+  - [Future Features](#future-features)
+- [Testing](#testing)
+  - [Automated Testing](#automated-testing)
+  - [Manual Test of User Stories](#manual-test-of-user-stories)
+  - [Test on Alternative Browsers and Screen Size](#test-on-alternative-browsers-and-screen-size)
+  - [Debugging](#debugging)
+  - [Validator Testing](#validator-testing)
+  - [Unfixed Bugs](#unfixed-bugs)
+- [Libraries and Programs Used](#libraries-and-programs-used)
+- [Deployment](#deployment)
+- [Credits](#credits)
+  - [Content](#content) -->
 
-## Gitpod Reminders
+# Overview
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+This site was developed to address a problem which occurred during my previous employment as a Senior Account Manager for a Health and Safety Consultancy. 
 
-`python3 -m http.server`
+# UX
 
-A blue button should appear to click: _Make Public_,
+This site was created respecting the Five Planes Of Website Design:
 
-Another blue button should appear to click: _Open Browser_.
+## Strategy
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+**Typical User**
 
-A blue button should appear to click: _Make Public_,
+<!-- *Site User*
 
-Another blue button should appear to click: _Open Browser_.
+A typical Site User would be a line manager responsible for the health and safety of their colleagues who are exposed to vibration as part of their duties. They will be required to assess the vibration risk exposed to their colleagues and will do this by completing a risk assessment. 
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+*Site Admin*
 
-To log into the Heroku toolbelt CLI:
+A typical Site Admin may be a Health and Safety Manager or a Director within a medium to large organisation whose employees are exposed to vibration as part of their duties. This company may have 100s of employees required to complete a vibration risk assessment on their behalf and/or have 100s of type of vibration equipment which their employees may use as part of their daily tasks. -->
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+**User Stories** 
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+As seen above, there will only be two different types of user of this site (Site User and Site Admin). I have broken down my user stories into these two categories:
 
-------
+<!-- *As a Site User:*
 
-## Release History
+| Epic   |   ID   |      User Story     |  Story Points |
+|--------|:------:|:--------------------|:-------------:|
+|Calculator|1A|**View Calculator**: I can View the Calculator so that I can start to assess the vibration exposure of a new task.|4|
+||1B|**Add Equipment to Calculator**: I can Add Equipment to a new Project so that I can include the equipment being used during a task to then assess the vibration exposure.|2|
+||1C|**View Calculator Equipment Details**: I can View Calculator Equipment Details so that I can view the partial exposure limits of the item.|3|
+||1D|**Edit Equipment Details in Calculator**: I can Edit Equipment Details in an Existing Project so that I can update equipment details where the duration of use has changed.|2|
+||1E|**Delete Equipment in Calculator**: I can Delete Equipment in an Existing Project so that I can remove equipment which my no longer be used in a task.|2|
+||1F|**Reset Calculator**: I can Reset Calculator so that I can assess a new task.|1|
+||1G|**Calculate Exposure Details**: I can Calculate Exposure Details so that I can assess the overall exposure to vibration of a task.|3|
+|Equipment (Site User)|2A|**View Equipment List**: I can View the Equipment List so that I can ensure the equipment needed for their calculation us available.|4|
+||2B|**View Equipment Details**: I can View Equipment Details so that I can view the exposure limits of various items and decide which equipment is the safest to use.|3|
+|Supplementary Site Features|3A|**Account Registration**: I can Register an Account so that I can access the system to assess a task with the calculator.|4|
+||3B|**Equipment Pagination**: I can View a Paginated List of Equipment so that I can easily find equipment and view it's details.|1|
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+*As a Site Admin:*
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+| Epic   |   ID   |      User Story     |  Story Points |
+|--------|:------:|:--------------------|:-------------:|
+|Equipment (Site Admin)|4A|**Add equipment**: I can Add Equipment so that It is available for a user to included it within a calculator.|3|
+||4B|**Edit Equipment Details**: I can Edit Equipment Details so that The most up to date information is available to the user.|1|
+||4C|**Delete Equipment**: I can Delete Equipment so that It is no longer available to be used in a calculator.|1|
+||4D|**Add Categories**: I can Add a Category so that It is available to be allocated to equipment.|3|
+||4E|**Edit Categories**: I can Edit a Category so that The correct category can be allocated to equipment.|1|
+||4F|**Delete Categories**: I can Delete a Category so that It is no longer available to be allocated to equipment.|1| -->
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+<!-- The objectives of this site are to:
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+- Make it quicker and easier for the user to assess a vibration task as all of the information is in a central accessible place
+- Improve the users selection of equipment as they are able to decide to use a tool with a lower magnitude now that this information is available to them
+- Reduce mistakes from potentially transferring incorrect information from testing reports or manufacturer's instructions
+- Improve the uptake of employees assessing their vibration tasks given all of the information will be available to them and it easy to use
+- Create a place for the management of company equipment. The database provides a central database of tools so the company is aware of what is being used within the business.  -->
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+## Scope
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+<!-- An MVP (Minimum Viable Product) approach was taken to the development of this site. The main features deemed as basic requirements for this site where:
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+- Account Registration
+- CRUD Functionality (Both Site User and Site Admin)
+- Device Responsiveness
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+For detailed explanation of all existing features see [Existing Features](#existing-features). While [Future Features](#future-features) where still within the possible scope of this project, they were deemed unnecessary at this point in time. -->
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+## Structure
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+**Site Navigation Flowchart**
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+<!-- ![Flowchart](static/readme_images/flowchart.jpg) -->
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+## Skeleton
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+**Wireframes**
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+*Index Page*
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+<!-- ![Index Page Wireframe](static/readme_images/index_wireframe.jpg) -->
 
-------
+**Database Schema**
 
-## FAQ about the uptime script
+<!-- After initially setting out all of the information required for the site, I used data normalisation to structure each relational model to help reduce data redundancy and improve data integrity.
 
-**Why have you added this script?**
+![Database Schema](static/readme_images/data_schema.jpg)
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+*Class Functions and JavaScript Functions*
 
-**How will this affect me?**
+To further improve data integrity, I decided to create class functions which calculated data values rather than storing this information in each model. As the user was able to update instances within the models which the outcome of the class function calculations were dependant on, keeping these separate from the model meant that only one instance within the model required updating.
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+This is also inclusive of the JavaScript Functions which update the users calculator page. These functions have been written in JavaScript rather than in the Django Calculator Model as the information required for these calculations can be multiple instances of equipment in users calculator. -->
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+## Surface
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+**Visual Design**
 
-**So….?**
+<!-- I selected 'Raleway' as the main font style to keep the website simple. The logo font of 'Permanent Marker' was used to add some style to the site. This font has also been used for the text links in the nav and for headings to maintain design continuity.
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+The heading background colour of light blue (rgb(108, 171, 221)) was also selected to keep with the minimalist style. I wanted to keep the main background white but then use the colours of the heading background for table headings to ensure that they were the main central focus of the page. Different colours have been used for the buttons on the site to make these easily distinguishable.
 
-**Can I opt out?**
+Icons were added to buttons throughout the site to aid the understanding of the functionality of that button. -->
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+# Agile Methodology
 
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
+An Agile approach was taken for the management of this project. 
 
-**Anything more?**
+<!-- - User stories were written for each of the sites features. These included details of both acceptance criteria and the a list of tasks required to complete them.
+- The user stories where then managed in a Kanban board which was created in [GitHub Projects](https://github.com/users/TuckerFaulk/projects/4/views/1?visibleFields=%5B%22Title%22%2C%22Assignees%22%2C%22Status%22%2C%22Labels%22%2C%22Milestone%22%5D). The kanban board was split into three columns: To do, In Progress, and Done.
+- User stories were then prioritized with the MoSCoW approach and labels where used to manage this. -->
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+# Languages Used
 
----
+<!-- - HTML
+- CSS
+- JavaScript
+- JQuery
+- Python
+- Django
+- Unittest (Django’s unit tests Python standard library module)
+- SQL (PostgreSQL) -->
 
-Happy coding!
+# Features
+
+## Existing Features
+
+### Home Page
+
+- The home page provides context of what the site does and how it can provide benefit to the user.
+
+<!-- ![Home Page](static/readme_images/home-page.jpg) -->
+
+### Logo
+
+<!-- ![Logo](static/readme_images/logo.jpg) -->
+
+### Navigation
+
+*User - Logged Out*
+
+<!-- ![Navigation](static/readme_images/navbar_logged_out.jpg) -->
+
+*User - Logged In*
+
+<!-- ![Navigation - User Logged In](static/readme_images/navbar_logged_in.jpg) -->
+
+*Mobile*
+
+<!-- ![Navigation - Mobile](static/readme_images/navbar_mobile.jpg) -->
+
+### Favicon
+
+<!-- ![Favicon](static/readme_images/android-chrome-192x192.png) -->
+
+
+
+
+
+## CRUD
+
+CRUD (Create, Read, Update, and Delete) functionality has been at the centre of the design for this website and these features have been included for both of the typical users:
+
+**Site User:**
+
+<!-- - CREATE: A site user can add equipment to their calculator
+- READ: A site user can view equipment details in their calculator and also in the equipment list
+- UPDATE: A site user can edit details of equipment in their calculator
+- DELETE: A site user can delete equipment from their calculator -->
+
+**Site Admin:**
+
+<!-- - CREATE: A site admin can add equipment/categories to the equipment/categories list through the admin site
+- READ: A site admin can view details of equipment in the equipment list through the admin site
+- UPDATE: A site admin can edit equipment/categories in the equipment/categories list through the admin site
+- DELETE: A site admin can delete equipment/categories from the equipment/categories list through the admin site -->
+
+## Other Features
+
+
+## Future Features
+
+<!-- - **Add Projects:** As a Site User I can Add a Project so that instead of resetting my calculator for a new task, I can create a new project and add to a new calculator (saving ones previously created to go back to). -->
+
+# Testing
+
+## Manual Test of User Stories
+
+
+
+## Test on Alternative Browsers and Screen Size
+
+|   Test   |   Small (≥576px) |  Medium (≥768px)   |   Large (≥992px)   |   Functionality (Pass)   |
+|----------|:----------------:|:------------------:|:------------------:|:------------------------:|
+|Chrome    |      ☑           |         ☑         |         ☑         |            ☑             |
+|Safari    |      ☑           |         ☑         |         ☑         |            ☑             |
+|Firefox   |      ☑           |         ☑         |         ☑         |            ☑             |
+|Edge      |      ☑           |         ☑         |         ☑         |            ☑             |
+
+## Debugging
+
+
+
+## Validator Testing
+
+- HTML: All html files were input into the checker and the Jinja code was removed to avoid errors. No errors were returned when passing through the official W3C HTML validator. 
+
+<!-- ![HTML W3C Validator](static/readme_images/html-w3c-validator.jpg) -->
+
+- CSS: No errors were found when passing through the official W3C CSS validator.
+
+<!-- ![CSS W3C Validator](static/readme_images/css-validation.jpg) -->
+
+- JSHint: No errors were found when passing through the JSHint validator.
+
+<!-- ![JSHint](static/readme_images/jshint.jpg) -->
+
+- CI Python Linter: No errors were returned when passing through the Code Institute Python Linter.
+
+<details>
+<summary>Calculator - CI Python Linter Screenshots</summary>
+
+<!-- *admin.py*
+
+![Admin - CI Python Linter](static/readme_images/admin-ci-linter.jpg)
+
+*apps.py*
+
+![Apps - CI Python Linter](static/readme_images/apps-ci-linter.jpg)
+
+*forms.py*
+
+![Forms - CI Python Linter](static/readme_images/forms-ci-linter.jpg)
+
+*models.py*
+
+![Models - CI Python Linter](static/readme_images/models-ci-linter.jpg)
+
+*urls.py*
+
+![URLs - CI Python Linter](static/readme_images/urls-ci-linter.jpg)
+
+*views.py*
+
+![Views - CI Python Linter](static/readme_images/views-ci-linter.jpg) -->
+
+</details>
+<br/>
+<details>
+<summary>Havscalcdb - CI Python Linter Screenshots</summary>
+
+*urls.py*
+
+<!-- ![URLs - CI Python Linter](static/readme_images/urls-havscalcdb-ci-linter.jpg) -->
+
+</details>
+<br/>
+
+- Lighthouse (Accessibility Audit): The page achieved a great accessibility performance.
+
+<!-- ![Lighthouse Accessibility Audit](static/readme_images/lighthouse.jpg) -->
+
+## Unfixed Bugs
+
+
+
+## Libraries and Programs Used
+
+<!-- - Github: Store Repository
+- Gitpod: IDE
+- Heroku: Site Deployment
+- Cloudinary: Serving static media files
+- ElephantSQL: PostgreSQL database hosting
+- Google Chrome, Microsoft Edge, Mozilla Firefox, Safari: Site testing on alternative browsers
+- Chrome Dev Tools: Debugging and CSS testing of the site
+- Microsoft OneNote: Planning notes for the project
+- Microsoft Whiteboard: Developing wireframes
+- Am I Responsive: Screenshots of the final project for the README file
+- Lucid Charts: Planning the site process with a flow diagram
+- Adobe Photoshop: Photo editing
+- Bootstrap: CSS Styling
+- Google Fonts: for the font families
+- Font Awesome: to add icons to the site
+- Real Favicon Generator: Creating Favicon -->
+
+**Installed Packages**
+
+<!-- - Cloudinary (1.30.0)
+- Dj-database-url (0.5.0)
+- Django (3.2.16)
+- Django-allauth (0.51.0)
+- Django-crispy-forms (1.14.0)
+- Gunicorn (20.1.0)
+- Psycopg2 (2.9.5)
+- Coverage (7.0.5) -->
+
+# Deployment
+
+This project was deployed on Heroku using Code Institute's Videos. After creating a GitHub repository, the steps taken to create the Heroku App were:
+
+# Credits
+
+I have again enjoyed learning with the Code Institute and completing my fifth assignment. I would like to thank my mentor Martina for her support, the CI Student Support Team and the CI Slack Community. Finally a big thank you to my girlfriend and little sister for their help with testing and the review of this site.
+
+## Content
+
+**Resources Used:**
+
+- Code Institutes Videos
+
+**Images:**
+
+*Jumbotron Image*
+
+<!-- - [Jackhammer](https://www.istockphoto.com/photo/working-on-a-road-construction-gm164526286-23495173) -->
+
+
+
+[Back to Top](#table-of-contents)
