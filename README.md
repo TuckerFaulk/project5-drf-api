@@ -291,6 +291,7 @@ DATABASES = {
   ```
   DEBUG = 'DEV' in os.environ
   ```
+  
 5. In env.py
   a. Add SECRET_KEY
   b. Comment DEV back in 
