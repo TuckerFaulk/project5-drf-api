@@ -5,30 +5,20 @@ The live link for the site can be found here - https://project5-dcms-react.herok
 The live link for the API can be found here - https://project5-dcms-drf-api.herokuapp.com/
 
 # Table of Contents
-<!-- - [Overview](#overview)
-- [UX](#ux)
-  - [Strategy](#strategy)
-  - [Scope](#scope)
-  - [Structure](#structure)
-  - [Skeleton](#skeleton)
-  - [Surface](#surface)
+- [Overview](#overview)
+- [User Stories](#user-stories)
+- [Site Navigation Flowchart](#site-navigation-flowchart)
+- [Database Schema](#database-schema)
 - [Languages Used](#languages-used)
-- [Features](#features)
-  - [Existing Features](#existing-features)
-  - [CRUD](#crud)
-  - [Other Features](#other-features)
-  - [Future Features](#future-features)
 - [Testing](#testing)
-  - [Automated Testing](#automated-testing)
   - [Manual Test of User Stories](#manual-test-of-user-stories)
-  - [Test on Alternative Browsers and Screen Size](#test-on-alternative-browsers-and-screen-size)
-  - [Debugging](#debugging)
   - [Validator Testing](#validator-testing)
   - [Unfixed Bugs](#unfixed-bugs)
 - [Libraries and Programs Used](#libraries-and-programs-used)
 - [Deployment](#deployment)
+- [Requirements](#requirements)
 - [Credits](#credits)
-  - [Content](#content) -->
+  - [Content](#content)
 
 # Overview
 
@@ -163,26 +153,13 @@ Data normalisation to structure each relational model to help reduce data redund
 
 ## Validator Testing
 
-<!-- - CSS: No errors were found when passing through the official W3C CSS validator.
-
-![CSS W3C Validator](src/assets/README_images/css_validation.png)
-
-- JSHint: The following issues were raised, and have been intentionally ignored as they are in relation later version of ES:
-
-1. Unclosed regular expression.
-2. 'async functions' is only available in ES8 (use 'esversion: 8').
-3. 'Optional chaining' is only available in ES11 (use 'esversion: 11').
-4. 'object spread property' is only available in ES9 (use 'esversion: 9').
-
-- Lighthouse (Accessibility Audit): The page achieved a great accessibility rating.
-
-![Lighthouse Accessibility Audit](src/assets/README_images/lighthouse.png) -->
+- CI Python Linter: No errors were found when passing through the CI Python Linter.
 
 ## Unfixed Bugs
 
 There were no unfixed bugs.
 
-## Libraries and Programs Used
+# Libraries and Programs Used
 
 - Github: Store Repository
 - Gitpod: IDE
@@ -195,40 +172,11 @@ There were no unfixed bugs.
 - Microsoft OneNote: Planning notes for the project
 - Lucid Charts: Planning the site process with a flow diagram
 
-# Deployment
+<!-- # Deployment -->
 
 This project was deployed on Heroku using Code Institute's Videos. After creating a GitHub repository, the steps taken to create the Heroku App were:
 
-<!-- 1. Install React.js:
-```
-npx create-react-app . --use-npm
-npm start
-```
-2. All packages were already installed in the CI React Template.
-3. Git add, commit, and push changes to gitpod.
-4. Create the project app on Heroku, and link the GitHub repository by navigating to the 'Deploy' tab.
-
-### Connecting to the API:
-1. Navigated to the Heroku app of the project DRF-API, and under the Settings tab, added the following configvars:
-- Key: CLIENT_ORIGIN | Value: https://react-app-name.herokuapp.com
-- Key: CLIENT_ORIGIN_DEV | Value: https://gitpod-browser-link.ws-eu54.gitpod.io
-2. Check that the trailing slash `\` at the end of both links has been removed, and save the configvar pairs.
-3. Install the Axios package, and create supporting `axiosDefaults.js` as shown in [Moments Walkthrough](https://github.com/Code-Institute-Solutions/moments/blob/cf955d2f2e6f70f61c92d1f9de85558d8e49f3a8/src/api/axiosDefaults.js). -->
-
-<!-- ### Deploy to Heroku:
-1. In the `scripts` section of `package.json` in gitpod, added the following command:
-```
-"heroku-prebuild": "npm install -g serve",
-```
-2. Add Procfile to project root & populate with the following:
-```
-web: serve -s build
-```
-3. Repeat the steps of git add/commit/push.
-4. Deploy the project via the deploy button on Heroku. -->
-
-## Deploy to ElephantSQL:
-<!-- (ElephantSQL)[https://www.elephantsql.com/] using the following [instructions](https://code-institute-students.github.io/deployment-docs/41-pp5-adv-fe/pp5-adv-fe-drf-01-create-a-database) -->
+<!-- TBC -->
 
 ## Requirements
 

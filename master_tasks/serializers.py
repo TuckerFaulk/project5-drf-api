@@ -12,12 +12,6 @@ class MasterTaskSerializer(serializers.ModelSerializer):
         request = self.context['request']
         return request.user == obj.owner
 
-    # Source: https://stackoverflow.com/questions/52491330/how-to-get-foreignkey-field-name-instead-of-id-in-django-rest-framework
-    # def to_representation(self, instance):
-    #     rep = super(MasterTaskSerializer, self).to_representation(instance)
-    #     rep['category'] = instance.category.category_name
-    #     return rep
-
     class Meta:
         model = MasterTask
         fields = [

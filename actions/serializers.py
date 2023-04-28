@@ -8,7 +8,8 @@ class ActionDetailSerializer(serializers.ModelSerializer):
     is_assigned_to = serializers.SerializerMethodField()
     is_overdue = serializers.SerializerMethodField()
     category_name = serializers.ReadOnlyField(source='category.category_name')
-    assigned_to_username = serializers.ReadOnlyField(source='assigned_to.username')
+    assigned_to_username = serializers.ReadOnlyField(
+        source='assigned_to.username')
 
     # Source: Code Institutes Django REST Framework Videos
     def get_is_assigned_to(self, obj):
@@ -37,7 +38,8 @@ class ActionDetailSerializer(serializers.ModelSerializer):
             )
         return value
 
-    # Source: https://stackoverflow.com/questions/52491330/how-to-get-foreignkey-field-name-instead-of-id-in-django-rest-framework
+    # Source: https://stackoverflow.com/questions/52491330/how-to-get-
+    # foreignkey-field-name-instead-of-id-in-django-rest-framework
     # def to_representation(self, instance):
     #     rep = super(ActionDetailSerializer, self).to_representation(instance)
     #     rep['assigned_to'] = instance.assigned_to.username

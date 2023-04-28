@@ -9,7 +9,7 @@ from django.dispatch import receiver
 class Action(models.Model):
 
     risk_rating_filter_choices = [
-        ("Low", "Low"), ("Medium", "Medium"), ("High", "High"),]
+        ("Low", "Low"), ("Medium", "Medium"), ("High", "High")]
     status_filter_choices = [
         ("Open", "Open"), ("Closed", "Closed")]
 
@@ -18,7 +18,8 @@ class Action(models.Model):
         Category, on_delete=models.CASCADE, related_name='action_category')
     description = models.TextField(blank=True)
     assigned_to = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='action_assigned_to', limit_choices_to={'is_staff': False})
+        User, on_delete=models.CASCADE, related_name='action_assigned_to',
+        limit_choices_to={'is_staff': False})
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     due_date = models.DateField(null=True, blank=True)

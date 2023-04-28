@@ -31,7 +31,8 @@ class ActionComment(Comment):
 @receiver(post_save, sender=UserTask)
 def create_task_status_comment(sender, instance, created, **kwargs):
     if created is False and instance.status == "Closed":
-        # reference https://stackoverflow.com/questions/4721771/get-current-user-log-in-signal-in-django
+        # reference https://stackoverflow.com/questions/4721771/get-current-
+        # user-log-in-signal-in-django
         import inspect
         for frame_record in inspect.stack():
             if frame_record[3] == 'get_response':
@@ -50,7 +51,8 @@ def create_task_status_comment(sender, instance, created, **kwargs):
 @receiver(post_save, sender=Action)
 def create_action_status_comment(sender, instance, created, **kwargs):
     if created is False and instance.status == "Closed":
-        # reference https://stackoverflow.com/questions/4721771/get-current-user-log-in-signal-in-django
+        # reference https://stackoverflow.com/questions/4721771/get-current-
+        # user-log-in-signal-in-django
         import inspect
         for frame_record in inspect.stack():
             if frame_record[3] == 'get_response':

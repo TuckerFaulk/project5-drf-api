@@ -33,6 +33,7 @@ class ActionDetail(generics.RetrieveUpdateDestroyAPIView):
     Retrieve, update or delete an action if it is assigned to the logged in
     user or an admin user is logged in
     """
-    permission_classes = [IsActionAssignedToOrReadOnly | permissions.IsAdminUser]
+    permission_classes = [IsActionAssignedToOrReadOnly |
+                          permissions.IsAdminUser]
     queryset = Action.objects.all()
     serializer_class = ActionDetailSerializer
