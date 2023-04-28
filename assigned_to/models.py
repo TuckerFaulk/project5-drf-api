@@ -4,7 +4,7 @@ from master_tasks.models import MasterTask
 
 
 class AssignedTo(models.Model):
-
+    """Model for Assigning Master Tasks"""
     completed_by_filter_choices = [("User", "User"), ("Admin", "Admin")]
 
     owner = models.ForeignKey(

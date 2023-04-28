@@ -7,6 +7,7 @@ from django.dispatch import receiver
 
 
 class Comment(models.Model):
+    """Base Model for Comments"""
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -21,15 +22,24 @@ class Comment(models.Model):
 
 
 class TaskComment(Comment):
+    """
+    Model for Task Comments Extending from Comments Model
+    """
     task_name = models.ForeignKey(UserTask, on_delete=models.CASCADE)
 
 
 class ActionComment(Comment):
+    """
+    Model for Action Comments Extending from Comments Model
+    """
     action_title = models.ForeignKey(Action, on_delete=models.CASCADE)
 
 
 @receiver(post_save, sender=UserTask)
 def create_task_status_comment(sender, instance, created, **kwargs):
+    """
+    Signal to create a task comment when a task is closed.
+    """
     if created is False and instance.status == "Closed":
         # reference https://stackoverflow.com/questions/4721771/get-current-
         # user-log-in-signal-in-django
@@ -50,6 +60,9 @@ def create_task_status_comment(sender, instance, created, **kwargs):
 
 @receiver(post_save, sender=Action)
 def create_action_status_comment(sender, instance, created, **kwargs):
+    """
+    Signal to create an action comment when an action is closed.
+    """
     if created is False and instance.status == "Closed":
         # reference https://stackoverflow.com/questions/4721771/get-current-
         # user-log-in-signal-in-django

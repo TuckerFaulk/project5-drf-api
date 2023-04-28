@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 
 
 class UserTask(models.Model):
-
+    """Model for User Tasks"""
     status_filter_choices = [("Open", "Open"), ("Closed", "Closed")]
     completed_by_filter_choices = [("User", "User"), ("Admin", "Admin"),]
 
@@ -38,6 +38,10 @@ class UserTask(models.Model):
 
 @receiver(post_save, sender=AssignedTo)
 def create_intial_user_task(sender, instance, created, **kwargs):
+    """
+    Signal to create a user task when a 
+    master task has been assigned
+    """
     if created:
         UserTask.objects.create(
             task_name=instance.task_name,
@@ -49,6 +53,11 @@ def create_intial_user_task(sender, instance, created, **kwargs):
 
 @receiver(post_save, sender=UserTask)
 def create_repeated_user_task(sender, instance, created, **kwargs):
+    """
+    Signal to create a user task if frequency
+    is all other than "Once". New due_date is set
+    based upon the frequency.
+    """
 
     todays_date = datetime.now()
 

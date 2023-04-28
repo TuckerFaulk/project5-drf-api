@@ -4,7 +4,9 @@ from datetime import datetime, timedelta
 
 
 class UserTaskSerializer(serializers.ModelSerializer):
-
+    """
+    Serializer for UserTask model
+    """
     task_name = serializers.ReadOnlyField(source='task_name.task_name')
     completed_by = serializers.ReadOnlyField()
     assigned_to = serializers.ReadOnlyField(

@@ -6,7 +6,7 @@ from .serializers import AssignedToSerializer
 
 class AssignedToList(generics.ListCreateAPIView):
     """
-
+    Lists all AssignedTo.
     """
     permission_classes = [permissions.IsAdminUser]
     queryset = AssignedTo.objects.all()
@@ -25,7 +25,8 @@ class AssignedToList(generics.ListCreateAPIView):
 
 class AssignedToDetail(generics.RetrieveUpdateDestroyAPIView):
     """
-
+    Retrieve, update or delete AssignedTo instance
+    only by admin user
     """
     permission_classes = [permissions.IsAdminUser]
     queryset = AssignedTo.objects.all()

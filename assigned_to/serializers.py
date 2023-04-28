@@ -4,7 +4,9 @@ from .models import AssignedTo
 
 
 class AssignedToSerializer(serializers.ModelSerializer):
-
+    """
+    Serializer for AssignedTo model
+    """
     owner = serializers.ReadOnlyField(source='owner.username')
     assigned_to_username = serializers.ReadOnlyField(
         source='assigned_to.username')

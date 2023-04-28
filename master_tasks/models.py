@@ -4,7 +4,7 @@ from categories.models import Category
 
 
 class MasterTask(models.Model):
-
+    """Model for Master Tasks"""
     frequency_filter_choices = [
         ("Once", "Once"),
         ("Daily", "Daily"),

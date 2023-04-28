@@ -7,7 +7,7 @@ from django.dispatch import receiver
 
 
 class Action(models.Model):
-
+    """Model for Actions"""
     risk_rating_filter_choices = [
         ("Low", "Low"), ("Medium", "Medium"), ("High", "High")]
     status_filter_choices = [
@@ -40,6 +40,10 @@ class Action(models.Model):
 
 @receiver(post_save, sender=UserTask)
 def create_task_action(sender, instance, created, **kwargs):
+    """
+    Signal to create new action if action-require is true
+    when a user task is closed.
+    """
     if created is False and instance.status == "Closed" and instance.action_required:
 
         Action.objects.create(

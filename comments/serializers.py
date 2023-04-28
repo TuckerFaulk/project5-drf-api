@@ -4,6 +4,9 @@ from .models import TaskComment, ActionComment
 
 
 class TaskCommentSerializer(serializers.ModelSerializer):
+    """
+    Serializer for TaskComment model
+    """
     owner = serializers.ReadOnlyField(source='owner.username')
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
@@ -40,6 +43,9 @@ class TaskCommentDetailSerializer(TaskCommentSerializer):
 
 
 class ActionCommentSerializer(serializers.ModelSerializer):
+    """
+    Serializer for ActionComment model
+    """
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')

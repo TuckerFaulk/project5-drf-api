@@ -4,7 +4,9 @@ from datetime import datetime
 
 
 class ActionDetailSerializer(serializers.ModelSerializer):
-
+    """
+    Serializer for Action model used in detail view
+    """
     is_assigned_to = serializers.SerializerMethodField()
     is_overdue = serializers.SerializerMethodField()
     category_name = serializers.ReadOnlyField(source='category.category_name')
@@ -38,14 +40,6 @@ class ActionDetailSerializer(serializers.ModelSerializer):
             )
         return value
 
-    # Source: https://stackoverflow.com/questions/52491330/how-to-get-
-    # foreignkey-field-name-instead-of-id-in-django-rest-framework
-    # def to_representation(self, instance):
-    #     rep = super(ActionDetailSerializer, self).to_representation(instance)
-    #     rep['assigned_to'] = instance.assigned_to.username
-    #     rep['category'] = instance.category.category_name
-    #     return rep
-
     class Meta:
         model = Action
         fields = [
@@ -60,6 +54,7 @@ class ActionSerializer(ActionDetailSerializer):
     """
     Serializer for the action model used in list view
     Status is a read only field so it can not be set to closed
-    before it is has already been opened
+    before it is has already been opened.
+    Extends from ActionDetailSerializer.
     """
     status = serializers.ReadOnlyField()

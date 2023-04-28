@@ -3,6 +3,9 @@ from .models import MasterTask
 
 
 class MasterTaskSerializer(serializers.ModelSerializer):
+    """
+    Serializer for MasterTask model
+    """
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
     category_name = serializers.ReadOnlyField(source='category.category_name')
