@@ -26,8 +26,6 @@ This site was developed to address a problem which occurred during my previous e
 
 # User Stories
 
-As seen above, there will only be two different types of user of this site (Site User and Site Admin). I have broken down my user stories into these two categories:
-
 *Categories*
 
 - View Categories List: As a **site admin** I can **view the categories list** so that **I can ensure that all appropriate categories are available to be allocated to a task or action**.
@@ -85,7 +83,7 @@ As seen above, there will only be two different types of user of this site (Site
 - Delete Action Comment: As a **site user/site admin** I can **delete an action comment** so that **I can delete a comment which has been incorrectly submitted**.
 - Action Status Update Comment: As a **site user/site admin** I can **automatically add a comment to detail a change in an actions status** so that **the comments have a log of any changes to the status of the action**.
 
-The user stories where then managed in a Kanban board which was created in [GitHub Projects](https://github.com/users/TuckerFaulk/projects/5/views/1?visibleFields=%5B%22Title%22%2C%22Assignees%22%2C%22Status%22%2C%22Labels%22%2C%22Milestone%22%5D). User stories were then prioritized with the MoSCoW approach and labels where used to manage this. The kanban board was split into five columns to manage the various stages of development:
+The user stories where managed in a Kanban board which was created in [GitHub Projects](https://github.com/users/TuckerFaulk/projects/5/views/1?visibleFields=%5B%22Title%22%2C%22Assignees%22%2C%22Status%22%2C%22Labels%22%2C%22Milestone%22%5D). User stories were then prioritized with the MoSCoW approach and labels where used to manage this. The kanban board was split into five columns to manage the various stages of development:
 
 1. To do: This item hasn't been started
 2. In Progress - DRF API: This item is actively being worked on in the DRF API
@@ -221,11 +219,11 @@ DATABASES = {
     )
 }
 ```
-- Add in the env.py:  
-  os.environ.setdefault("DATABASE_URL", "<your PostgreSQL URL here>")
-- Temporarily comment out the environment variable to connect gitpod to your external database.
-- In ElepahantSQL browser, check if the database is now connected 
-- If connected, migrate the database and create a superuser
+4. Add in the env.py:  
+5. os.environ.setdefault("DATABASE_URL", "<your PostgreSQL URL here>")
+6. Temporarily comment out the environment variable to connect gitpod to your external database.
+7. In ElepahantSQL browser, check if the database is now connected 
+8. If connected, migrate the database and create a superuser
 
 **Deploy on Heroku**
 
@@ -288,7 +286,7 @@ DATABASES = {
       CORS_ALLOWED_ORIGIN_REGEXES = [
           rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
       ]
-    ```
+  ```
   k. Set the debug value to True if the DEV environment variable exists:
   ```
   DEBUG = 'DEV' in os.environ
