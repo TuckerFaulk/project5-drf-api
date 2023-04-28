@@ -172,7 +172,7 @@ There were no unfixed bugs.
 - Microsoft OneNote: Planning notes for the project
 - Lucid Charts: Planning the site process with a flow diagram
 
-<!-- # Deployment -->
+# Deployment
 
 This project was deployed on Heroku using Code Institute's Videos. After creating a GitHub repository, the steps taken to create the Heroku App were:
 
