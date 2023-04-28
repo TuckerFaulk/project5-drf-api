@@ -41,7 +41,7 @@ def create_task_status_comment(sender, instance, created, **kwargs):
     Signal to create a task comment when a task is closed.
     """
     if created is False and instance.status == "Closed":
-        # reference https://stackoverflow.com/questions/4721771/get-current-
+        # Reference https://stackoverflow.com/questions/4721771/get-current-
         # user-log-in-signal-in-django
         import inspect
         for frame_record in inspect.stack():
@@ -64,7 +64,7 @@ def create_action_status_comment(sender, instance, created, **kwargs):
     Signal to create an action comment when an action is closed.
     """
     if created is False and instance.status == "Closed":
-        # reference https://stackoverflow.com/questions/4721771/get-current-
+        # Reference https://stackoverflow.com/questions/4721771/get-current-
         # user-log-in-signal-in-django
         import inspect
         for frame_record in inspect.stack():

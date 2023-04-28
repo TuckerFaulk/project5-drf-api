@@ -176,7 +176,133 @@ There were no unfixed bugs.
 
 This project was deployed on Heroku using Code Institute's Videos. After creating a GitHub repository, the steps taken to create the Heroku App were:
 
-<!-- TBC -->
+**Create Database**
+
+1. In ElepahantSQL, click "Create New instance"
+2. Set up the Tiny Turtle plan, select the nearest datacenter and click "Review"
+3. Copy the new DATABASE_URL
+
+**Connect Cloudinary**
+
+1. In the terminal: install dj-cloudinary-storage
+2. Add CLOUDINARY_URL to the env.py file
+3. In settings.py, update the apps to include cloudinary-storage
+4. Below the import statements, add the following variables for Cloudinary:
+```
+CLOUDINARY_STORAGE = {
+    'CLOUDINARY_URL': os.environ.ger('CLOUDINARY_URL')
+}
+MEDIA_URL = '/media/'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinartStorage'
+```
+5. Below INSTALLED_APPS, set site ID:
+```
+SITE_ID = 1
+```
+
+**Create the Heroku App**
+
+1. On the Heroku dashboard, click "Create a new app".
+2. Go to the config vars in settings and paste in the new DATABASE_URL and CLOUDINARY_URL
+
+**Connect Project to ElepahantSQL**
+
+1. In the terminal: install dj_database_url and psycopg2
+2. In settings.py: import dj-database_url and import os
+3. Updated the DATABASES variable to:
+```
+DATABASES = {
+    'default': ({
+       'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    } if 'DEV' in os.environ else dj_database_url.parse(
+        os.environ.get('DATABASE_URL')
+    )
+    )
+}
+```
+- Add in the env.py:  
+  os.environ.setdefault("DATABASE_URL", "<your PostgreSQL URL here>")
+- Temporarily comment out the environment variable to connect gitpod to your external database.
+- In ElepahantSQL browser, chcek if the database is now connected 
+- If connected, migrate the database and create a superuser
+
+**Deploy on Heroku**
+
+*In gitpod workspace*
+
+1. In the terminal, install gunicorn
+2. Update the requirements.txt file
+3. Create Procfile
+4. In settings.py 
+  a. Add the Heroku app to the ALLOWED_HOSTS variable:
+    ```
+    os.environ.get('ALLOWED_HOST'),
+    'localhost',
+    ``` 
+  b. Add corsheaders to INSTALLED_APPS
+  d. Add corsheaders middleware to the top of MIDDLEWARE:
+  ```
+  'corsheaders.middleware.CorsMiddleware',
+  ```
+  e. Set ALLOWED_ORIGIN to make network requests
+  f. Below BASE_DIR, create the REST_FRAMEWORK, and include page pagination to improve app loading times, pagination count, and date/time format:
+  ```
+  REST_FRAMEWORK = {
+      'DEFAULT_AUTHENTICATION_CLASSES': [(
+          'rest_framework.authentication.SessionAuthentication'
+          if 'DEV' in os.environ
+          else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
+      )],
+      'DEFAULT_PAGINATION_CLASS':
+          'rest_framework.pagination.PageNumberPagination',
+      'PAGE_SIZE': 10,
+      'DATETIME_FORMAT': '%d %b %Y',
+  }
+  ```
+  g. Set the default renderer to JSON:
+  ```
+  if 'DEV' not in os.environ:
+      REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = [
+          'rest_framework.renderers.JSONRenderer',
+      ]
+  ```
+  h. Add the following, setting the JWT_AUTH_SAMESITE to 'None'
+  ```
+  REST_USE_JWT = True
+  JWT_AUTH_SECURE = True
+  JWT_AUTH_COOKIE = 'my-app-auth'
+  JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
+  JWT_AUTH_SAMESITE = 'None'
+  ```
+  i. Remove the value for SECRET_KEY and replace with: SECRET_KEY = os.getenv('SECRET_KEY')
+  j. Below ALLOWED_HOST, added the CORS_ALLOWED variable.
+  ```
+  if 'CLIENT_ORIGIN' in os.environ:
+    CORS_ALLOWED_ORIGINS = [
+        os.environ.get('CLIENT_ORIGIN')
+    ]
+
+  if 'CLIENT_ORIGIN_DEV' in os.environ:
+      extracted_url = re.match(r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE).group(0)
+      CORS_ALLOWED_ORIGIN_REGEXES = [
+          rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
+      ]
+    ```
+  k. Set the debug value to True if the DEV environment variable exists:
+  ```
+  DEBUG = 'DEV' in os.environ
+  ```
+5. In env.py
+  a. Add SECRET_KEY
+  b. Comment DEV back in 
+6. Update the requirements.txt file
+7. Migrate the database
+8. Add, commit and push the code to Github 
+
+*In Heroku*
+1. Add SECRET_KEY, ALLOWED_HOST, CLIENT_ORIGIN and CLIENT_ORIGIN_DEV to the config vars
+2. Manually re-deploy the app to github 
 
 ## Requirements
 
