@@ -129,8 +129,8 @@ Data normalisation to structure each relational model to help reduce data redund
 |Add User Task: As a **site admin** I can **automatically create a user task once a master task has been allocated** so that **I know a user task has been created which requires completion**.|☑|
 |View User Task List: As a **site user/site admin** I can **view the user tasks which are to be completed by me** so that **I am aware what tasks I need to completed**.|☑|
 |View Overdue User Task List: As a **site user/site admin** I can **view the overdue user tasks which are to be completed by me** so that **I can prioritise completing tasks which are overdue**.|☑|
-|Filter User Tasks: As a **site user/site admin** I can **filter user tasks** so that **so it is eay to find the user task which I am looking for**.|☑|
-|Search for User Tasks: As a **site user/site admin** I can **search for user tasks** so that **so it is eay to find the user task which I am looking for**.|☑|
+|Filter User Tasks: As a **site user/site admin** I can **filter user tasks** so that **so it is easy to find the user task which I am looking for**.|☑|
+|Search for User Tasks: As a **site user/site admin** I can **search for user tasks** so that **so it is easy to find the user task which I am looking for**.|☑|
 |View User Task Details: As a **site user/site admin** I can **view a user tasks details** so that **I am aware what tasks I need to completed**.|☑|
 |Update User Task Status: As a **site user/site admin** I can **update a user tasks status** so that **I can record whether a task has been completed or is in progress**.|☑|
 |Add Image to User Task: As a **site user/site admin** I can **add an image to a user task** so that **I can provide additional evidence that a task has been completed or that an issue was identified**.|☑|
@@ -224,7 +224,7 @@ DATABASES = {
 - Add in the env.py:  
   os.environ.setdefault("DATABASE_URL", "<your PostgreSQL URL here>")
 - Temporarily comment out the environment variable to connect gitpod to your external database.
-- In ElepahantSQL browser, chcek if the database is now connected 
+- In ElepahantSQL browser, check if the database is now connected 
 - If connected, migrate the database and create a superuser
 
 **Deploy on Heroku**
@@ -298,7 +298,7 @@ DATABASES = {
   b. Comment DEV back in 
 6. Update the requirements.txt file
 7. Migrate the database
-8. Add, commit and push the code to Github 
+8. Add, commit and push the code to github 
 
 *In Heroku*
 1. Add SECRET_KEY, ALLOWED_HOST, CLIENT_ORIGIN and CLIENT_ORIGIN_DEV to the config vars
